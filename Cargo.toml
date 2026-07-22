@@ -37,3 +37,6 @@ time = { version = "0.3", default-features = true, features = [
 default = ["rustls"]
 native-tls = ["reqwest/native-tls"]
 rustls = ["reqwest/rustls"]
+
+[dev-dependencies]
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }

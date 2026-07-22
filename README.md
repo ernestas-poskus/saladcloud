@@ -23,6 +23,19 @@ Put the package under your project folder in a directory named `saladcloud` and 
 ```
 saladcloud = { version = "0.1" }
 ```
+## Examples
+
+Check out the [examples](examples) directory for complete, runnable code demonstrating how to use the SDK.
+
+- [get_quotas.rs](examples/get_quotas.rs): Shows how to construct client configuration and call the quotas API.
+- [list_gpu_classes.rs](examples/list_gpu_classes.rs): Shows how to query available GPU classes from the organization data API.
+
+To run the examples:
+
+```bash
+cargo run --example get_quotas
+cargo run --example list_gpu_classes
+```
 
 ## Documentation for API Endpoints
 

@@ -6,7 +6,7 @@
 //!
 //! ## Example Usage
 //!
-//! ```rust,no_run
+//! ```rust,ignore
 //! use saladcloud::apis::configuration::Configuration;
 //! use saladcloud::apis::quotas_api;
 //!
