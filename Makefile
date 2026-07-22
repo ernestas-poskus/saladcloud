@@ -12,7 +12,7 @@ generate_salad_cloud_openapi:
 	openapi-generator-cli generate \
 	  -i salad-cloud.yaml \
 	  -g rust \
-	  -o ./ \
+	  -o ./snapshot \
 	  --additional-properties=useChrono=false,packageName=saladcloud,packageVersion=0.1.0,deriveDefault=false \
 	  --type-mappings=DateTime=time::OffsetDateTime,date=time::Date \
 	  --import-mappings=time::OffsetDateTime=time::OffsetDateTime,time::Date=time::Date
