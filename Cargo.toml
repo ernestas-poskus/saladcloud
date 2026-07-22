@@ -8,7 +8,7 @@ documentation = "https://docs.rs/saladcloud"
 repository = "https://github.com/ernestas-poskus/saladcloud"
 readme = "README.md"
 license = "MIT"
-keywords = ["saladcloud", "api", "rest", "client", "async", "serde"]
+keywords = ["api", "rest", "client"]
 categories = ["api-bindings", "asynchronous", "network-programming"]
 
 [dependencies]
