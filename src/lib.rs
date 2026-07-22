@@ -1,30 +1,4 @@
-//! # SaladCloud API Client
-//!
-//! A Rust client library for the SaladCloud REST API.
-//!
-//! For more details, refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference).
-//!
-//! ## Example Usage
-//!
-//! ```rust,ignore
-//! use saladcloud::apis::configuration::Configuration;
-//! use saladcloud::apis::quotas_api;
-//!
-//! #[tokio::main]
-//! async fn main() {
-//!     let mut config = Configuration::new();
-//!     config.api_key = Some(saladcloud::apis::configuration::ApiKey {
-//!         prefix: None,
-//!         key: "your-salad-api-key".to_string(),
-//!     });
-//!
-//!     // Fetch quotas for your organization
-//!     if let Ok(quotas) = quotas_api::get_quotas(&config, "your-organization-name").await {
-//!         println!("Quotas retrieved successfully: {:?}", quotas);
-//!     }
-//! }
-//! ```
-
+#![doc = include_str!("../README.md")]
 #![deny(
     warnings,
     bad_style,
