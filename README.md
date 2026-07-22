@@ -1,6 +1,7 @@
 # saladcloud - Rust API client
 
-[![Cargo Test](https://github.com/ernestas-poskus/saladcloud/actions/workflows/cargo-test.yml/badge.svg)](https://github.com/quietscroll/saladcloud/actions/workflows/cargo-test.yml)
+[![Cargo Test](https://github.com/ernestas-poskus/saladcloud/actions/workflows/cargo-test.yml/badge.svg)](https://github.com/ernestas-poskus/saladcloud/actions/workflows/cargo-test.yml)
+[![docs.rs](https://img.shields.io/docsrs/saladcloud)](https://docs.rs/saladcloud)
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
