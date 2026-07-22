@@ -1,0 +1,39 @@
+[package]
+name = "saladcloud"
+version = "0.1.0"
+edition = "2024"
+authors = ["Ernestas Poskus <ernestas.poskus@gmail.com>"]
+description = "The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details."
+documentation = "https://docs.rs/saladcloud"
+repository = "https://github.com/ernestas-poskus/saladcloud"
+readme = "README.md"
+license = "MIT"
+keywords = ["saladcloud", "api", "rest", "client", "async", "serde"]
+categories = ["api-bindings", "asynchronous", "network-programming"]
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_with = { version = "3.8", default-features = false, features = [
+  "base64",
+  "std",
+  "macros",
+] }
+serde_json = "1"
+serde_repr = "0.1"
+url = "2"
+uuid = { version = "1", features = ["serde", "v4"] }
+reqwest = { version = "0.13", default-features = false, features = [
+  "json",
+  "multipart",
+  "query",
+  "form",
+] }
+time = { version = "0.3", default-features = true, features = [
+  "serde",
+  "macros",
+] }
+
+[features]
+default = ["rustls"]
+native-tls = ["reqwest/native-tls"]
+rustls = ["reqwest/rustls"]

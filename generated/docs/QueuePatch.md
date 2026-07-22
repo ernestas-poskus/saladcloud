@@ -1,0 +1,12 @@
+# QueuePatch
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**description** | Option<**String**> | The description. This may be used as a space for notes or other information about the queue. | [optional]
+**display_name** | Option<**String**> | The display name. This may be used as a more human-readable name. | [optional]
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
