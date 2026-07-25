@@ -118,14 +118,21 @@ impl Default for WorkerConfig {
 impl WorkerConfig {
     /// Builds worker configuration from SaladCloud worker environment variables.
     pub fn from_env() -> Self {
+        Self::from_env_values(|key| std::env::var(key))
+    }
+
+    /// Builds worker configuration from an injected environment reader.
+    pub fn from_env_values(
+        mut get_env: impl FnMut(&str) -> std::result::Result<String, std::env::VarError>,
+    ) -> Self {
         let mut config = Self::default();
-        if let Ok(metadata_uri) = std::env::var("SALAD_METADATA_URI") {
+        if let Ok(metadata_uri) = get_env("SALAD_METADATA_URI") {
             config.metadata_uri = metadata_uri;
         }
-        if let Ok(service_endpoint) = std::env::var("SALAD_SERVICE_ENDPOINT") {
+        if let Ok(service_endpoint) = get_env("SALAD_SERVICE_ENDPOINT") {
             config.service_endpoint = service_endpoint;
         }
-        if let Ok(use_tls) = std::env::var("SALAD_SERVICE_ENDPOINT_TLS") {
+        if let Ok(use_tls) = get_env("SALAD_SERVICE_USE_TLS") {
             config.use_tls = !matches!(use_tls.as_str(), "0" | "false" | "FALSE" | "False");
         }
         config

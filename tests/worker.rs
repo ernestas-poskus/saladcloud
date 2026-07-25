@@ -36,6 +36,18 @@ fn service_endpoint_uri_adds_scheme_from_tls_setting() {
 }
 
 #[test]
+fn worker_config_reads_current_tls_env_name() {
+    let config = WorkerConfig::from_env_values(|key| match key {
+        "SALAD_METADATA_URI" => Err(std::env::VarError::NotPresent),
+        "SALAD_SERVICE_ENDPOINT" => Err(std::env::VarError::NotPresent),
+        "SALAD_SERVICE_USE_TLS" => Ok("false".to_string()),
+        _ => panic!("unexpected env key: {key}"),
+    });
+
+    assert!(!config.use_tls);
+}
+
+#[test]
 fn job_input_json_decodes_queue_body() {
     let job = Job {
         id: "job-123".to_string(),
