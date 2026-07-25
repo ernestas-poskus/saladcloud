@@ -240,10 +240,12 @@ impl QueueWorker {
         Fut: Future<Output = std::result::Result<Vec<u8>, String>>,
     {
         let token = self.fetch_token().await?;
-        let mut request = Request::new(proto::AcceptJobsRequest {
-            current_job_id: String::new(),
-        });
-        authorize(&mut request, &token)?;
+        let request = authorize(
+            proto::AcceptJobsRequest {
+                current_job_id: String::new(),
+            },
+            &token,
+        )?;
 
         let mut stream = self.grpc.accept_jobs(request).await?.into_inner();
         while let Some(response) = stream.message().await? {
@@ -291,24 +293,23 @@ impl QueueWorker {
     }
 
     async fn complete_job(&mut self, token: &str, job_id: String, output: Vec<u8>) -> Result<()> {
-        let mut request = Request::new(proto::CompleteJobRequest { job_id, output });
-        authorize(&mut request, token)?;
+        let request = authorize(proto::CompleteJobRequest { job_id, output }, token)?;
         let _response = self.grpc.complete_job(request).await?;
         Ok(())
     }
 
     async fn reject_job(&mut self, token: &str, job_id: String) -> Result<()> {
-        let mut request = Request::new(proto::RejectJobRequest { job_id });
-        authorize(&mut request, token)?;
+        let request = authorize(proto::RejectJobRequest { job_id }, token)?;
         let _response = self.grpc.reject_job(request).await?;
         Ok(())
     }
 }
 
-fn authorize<T>(request: &mut Request<T>, token: &str) -> Result<()> {
+fn authorize<T>(message: T, token: &str) -> Result<Request<T>> {
     let value = MetadataValue::try_from(format!("Bearer {token}"))?;
-    let _previous = request.metadata_mut().insert("authorization", value);
-    Ok(())
+    let mut request = Request::new(message);
+    let _ = request.metadata_mut().insert("authorization", value);
+    Ok(request)
 }
 
 mod proto {
