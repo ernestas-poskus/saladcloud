@@ -260,14 +260,14 @@ pub async fn create_container_group(
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => {
-                return Err(Error::from(serde_json::Error::custom(
+                Err(Error::from(serde_json::Error::custom(
                     "Received `text/plain` content type response that cannot be converted to `models::ContainerGroup`",
-                )));
+                )))
             }
             ContentType::Unsupported(unknown_type) => {
-                return Err(Error::from(serde_json::Error::custom(format!(
+                Err(Error::from(serde_json::Error::custom(format!(
                     "Received `{unknown_type}` content type response that cannot be converted to `models::ContainerGroup`"
-                ))));
+                ))))
             }
         }
     } else {
@@ -383,14 +383,14 @@ pub async fn get_container_group(
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => {
-                return Err(Error::from(serde_json::Error::custom(
+                Err(Error::from(serde_json::Error::custom(
                     "Received `text/plain` content type response that cannot be converted to `models::ContainerGroup`",
-                )));
+                )))
             }
             ContentType::Unsupported(unknown_type) => {
-                return Err(Error::from(serde_json::Error::custom(format!(
+                Err(Error::from(serde_json::Error::custom(format!(
                     "Received `{unknown_type}` content type response that cannot be converted to `models::ContainerGroup`"
-                ))));
+                ))))
             }
         }
     } else {
@@ -456,14 +456,14 @@ pub async fn get_container_group_instance(
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => {
-                return Err(Error::from(serde_json::Error::custom(
+                Err(Error::from(serde_json::Error::custom(
                     "Received `text/plain` content type response that cannot be converted to `models::ContainerGroupInstance`",
-                )));
+                )))
             }
             ContentType::Unsupported(unknown_type) => {
-                return Err(Error::from(serde_json::Error::custom(format!(
+                Err(Error::from(serde_json::Error::custom(format!(
                     "Received `{unknown_type}` content type response that cannot be converted to `models::ContainerGroupInstance`"
-                ))));
+                ))))
             }
         }
     } else {
@@ -526,14 +526,14 @@ pub async fn list_container_group_instances(
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => {
-                return Err(Error::from(serde_json::Error::custom(
+                Err(Error::from(serde_json::Error::custom(
                     "Received `text/plain` content type response that cannot be converted to `models::ContainerGroupInstanceCollection`",
-                )));
+                )))
             }
             ContentType::Unsupported(unknown_type) => {
-                return Err(Error::from(serde_json::Error::custom(format!(
+                Err(Error::from(serde_json::Error::custom(format!(
                     "Received `{unknown_type}` content type response that cannot be converted to `models::ContainerGroupInstanceCollection`"
-                ))));
+                ))))
             }
         }
     } else {
@@ -593,14 +593,14 @@ pub async fn list_container_groups(
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => {
-                return Err(Error::from(serde_json::Error::custom(
+                Err(Error::from(serde_json::Error::custom(
                     "Received `text/plain` content type response that cannot be converted to `models::ContainerGroupCollection`",
-                )));
+                )))
             }
             ContentType::Unsupported(unknown_type) => {
-                return Err(Error::from(serde_json::Error::custom(format!(
+                Err(Error::from(serde_json::Error::custom(format!(
                     "Received `{unknown_type}` content type response that cannot be converted to `models::ContainerGroupCollection`"
-                ))));
+                ))))
             }
         }
     } else {
@@ -945,14 +945,14 @@ pub async fn update_container_group(
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => {
-                return Err(Error::from(serde_json::Error::custom(
+                Err(Error::from(serde_json::Error::custom(
                     "Received `text/plain` content type response that cannot be converted to `models::ContainerGroup`",
-                )));
+                )))
             }
             ContentType::Unsupported(unknown_type) => {
-                return Err(Error::from(serde_json::Error::custom(format!(
+                Err(Error::from(serde_json::Error::custom(format!(
                     "Received `{unknown_type}` content type response that cannot be converted to `models::ContainerGroup`"
-                ))));
+                ))))
             }
         }
     } else {
@@ -1023,14 +1023,14 @@ pub async fn update_container_group_instance(
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => {
-                return Err(Error::from(serde_json::Error::custom(
+                Err(Error::from(serde_json::Error::custom(
                     "Received `text/plain` content type response that cannot be converted to `models::ContainerGroupInstance`",
-                )));
+                )))
             }
             ContentType::Unsupported(unknown_type) => {
-                return Err(Error::from(serde_json::Error::custom(format!(
+                Err(Error::from(serde_json::Error::custom(format!(
                     "Received `{unknown_type}` content type response that cannot be converted to `models::ContainerGroupInstance`"
-                ))));
+                ))))
             }
         }
     } else {

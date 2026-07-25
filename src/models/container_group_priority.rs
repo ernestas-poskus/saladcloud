@@ -13,9 +13,11 @@ use serde::{Deserialize, Serialize};
 /// ContainerGroupPriority : Specifies the priority level for container group execution, which determines resource allocation and scheduling precedence.
 /// Specifies the priority level for container group execution, which determines resource allocation and scheduling precedence.
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+#[derive(Default)]
 pub enum ContainerGroupPriority {
     #[serde(rename = "high")]
     /// Variant.
+    #[default]
     High,
     #[serde(rename = "medium")]
     /// Variant.
@@ -39,8 +41,3 @@ impl std::fmt::Display for ContainerGroupPriority {
     }
 }
 
-impl Default for ContainerGroupPriority {
-    fn default() -> ContainerGroupPriority {
-        Self::High
-    }
-}

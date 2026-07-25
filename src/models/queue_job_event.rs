@@ -29,9 +29,11 @@ impl QueueJobEvent {
 }
 /// The action that was taken on the queue job
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+#[derive(Default)]
 pub enum Action {
     #[serde(rename = "created")]
     /// Variant.
+    #[default]
     Created,
     #[serde(rename = "started")]
     /// Variant.
@@ -47,8 +49,3 @@ pub enum Action {
     Failed,
 }
 
-impl Default for Action {
-    fn default() -> Action {
-        Self::Created
-    }
-}

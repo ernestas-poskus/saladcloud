@@ -13,9 +13,11 @@ use serde::{Deserialize, Serialize};
 /// LogEntryQuerySortOrder : The sort order of the log entries. `asc` will sort the log entries in chronological order. `desc` will sort the log entries in reverse chronological order.
 /// The sort order of the log entries. `asc` will sort the log entries in chronological order. `desc` will sort the log entries in reverse chronological order.
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+#[derive(Default)]
 pub enum LogEntryQuerySortOrder {
     #[serde(rename = "desc")]
     /// Variant.
+    #[default]
     Desc,
     #[serde(rename = "asc")]
     /// Variant.
@@ -31,8 +33,3 @@ impl std::fmt::Display for LogEntryQuerySortOrder {
     }
 }
 
-impl Default for LogEntryQuerySortOrder {
-    fn default() -> LogEntryQuerySortOrder {
-        Self::Desc
-    }
-}

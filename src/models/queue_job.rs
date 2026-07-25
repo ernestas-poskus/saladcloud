@@ -73,9 +73,11 @@ impl QueueJob {
 }
 /// The job status
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+#[derive(Default)]
 pub enum Status {
     #[serde(rename = "pending")]
     /// Variant.
+    #[default]
     Pending,
     #[serde(rename = "running")]
     /// Variant.
@@ -91,8 +93,3 @@ pub enum Status {
     Failed,
 }
 
-impl Default for Status {
-    fn default() -> Status {
-        Self::Pending
-    }
-}

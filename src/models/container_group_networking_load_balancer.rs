@@ -13,9 +13,11 @@ use serde::{Deserialize, Serialize};
 /// ContainerGroupNetworkingLoadBalancer : The container group networking load balancer.
 /// The container group networking load balancer.
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+#[derive(Default)]
 pub enum ContainerGroupNetworkingLoadBalancer {
     #[serde(rename = "round_robin")]
     /// Variant.
+    #[default]
     RoundRobin,
     #[serde(rename = "least_number_of_connections")]
     /// Variant.
@@ -31,8 +33,3 @@ impl std::fmt::Display for ContainerGroupNetworkingLoadBalancer {
     }
 }
 
-impl Default for ContainerGroupNetworkingLoadBalancer {
-    fn default() -> ContainerGroupNetworkingLoadBalancer {
-        Self::RoundRobin
-    }
-}

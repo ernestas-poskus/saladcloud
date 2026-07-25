@@ -196,14 +196,14 @@ pub async fn create_queue(
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => {
-                return Err(Error::from(serde_json::Error::custom(
+                Err(Error::from(serde_json::Error::custom(
                     "Received `text/plain` content type response that cannot be converted to `models::Queue`",
-                )));
+                )))
             }
             ContentType::Unsupported(unknown_type) => {
-                return Err(Error::from(serde_json::Error::custom(format!(
+                Err(Error::from(serde_json::Error::custom(format!(
                     "Received `{unknown_type}` content type response that cannot be converted to `models::Queue`"
-                ))));
+                ))))
             }
         }
     } else {
@@ -271,14 +271,14 @@ pub async fn create_queue_job(
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => {
-                return Err(Error::from(serde_json::Error::custom(
+                Err(Error::from(serde_json::Error::custom(
                     "Received `text/plain` content type response that cannot be converted to `models::QueueJob`",
-                )));
+                )))
             }
             ContentType::Unsupported(unknown_type) => {
-                return Err(Error::from(serde_json::Error::custom(format!(
+                Err(Error::from(serde_json::Error::custom(format!(
                     "Received `{unknown_type}` content type response that cannot be converted to `models::QueueJob`"
-                ))));
+                ))))
             }
         }
     } else {
@@ -450,14 +450,14 @@ pub async fn get_queue(
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => {
-                return Err(Error::from(serde_json::Error::custom(
+                Err(Error::from(serde_json::Error::custom(
                     "Received `text/plain` content type response that cannot be converted to `models::Queue`",
-                )));
+                )))
             }
             ContentType::Unsupported(unknown_type) => {
-                return Err(Error::from(serde_json::Error::custom(format!(
+                Err(Error::from(serde_json::Error::custom(format!(
                     "Received `{unknown_type}` content type response that cannot be converted to `models::Queue`"
-                ))));
+                ))))
             }
         }
     } else {
@@ -523,14 +523,14 @@ pub async fn get_queue_job(
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => {
-                return Err(Error::from(serde_json::Error::custom(
+                Err(Error::from(serde_json::Error::custom(
                     "Received `text/plain` content type response that cannot be converted to `models::QueueJob`",
-                )));
+                )))
             }
             ContentType::Unsupported(unknown_type) => {
-                return Err(Error::from(serde_json::Error::custom(format!(
+                Err(Error::from(serde_json::Error::custom(format!(
                     "Received `{unknown_type}` content type response that cannot be converted to `models::QueueJob`"
-                ))));
+                ))))
             }
         }
     } else {
@@ -603,14 +603,14 @@ pub async fn list_queue_jobs(
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => {
-                return Err(Error::from(serde_json::Error::custom(
+                Err(Error::from(serde_json::Error::custom(
                     "Received `text/plain` content type response that cannot be converted to `models::QueueJobCollection`",
-                )));
+                )))
             }
             ContentType::Unsupported(unknown_type) => {
-                return Err(Error::from(serde_json::Error::custom(format!(
+                Err(Error::from(serde_json::Error::custom(format!(
                     "Received `{unknown_type}` content type response that cannot be converted to `models::QueueJobCollection`"
-                ))));
+                ))))
             }
         }
     } else {
@@ -670,14 +670,14 @@ pub async fn list_queues(
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => {
-                return Err(Error::from(serde_json::Error::custom(
+                Err(Error::from(serde_json::Error::custom(
                     "Received `text/plain` content type response that cannot be converted to `models::QueueCollection`",
-                )));
+                )))
             }
             ContentType::Unsupported(unknown_type) => {
-                return Err(Error::from(serde_json::Error::custom(format!(
+                Err(Error::from(serde_json::Error::custom(format!(
                     "Received `{unknown_type}` content type response that cannot be converted to `models::QueueCollection`"
-                ))));
+                ))))
             }
         }
     } else {
@@ -745,14 +745,14 @@ pub async fn update_queue(
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => {
-                return Err(Error::from(serde_json::Error::custom(
+                Err(Error::from(serde_json::Error::custom(
                     "Received `text/plain` content type response that cannot be converted to `models::Queue`",
-                )));
+                )))
             }
             ContentType::Unsupported(unknown_type) => {
-                return Err(Error::from(serde_json::Error::custom(format!(
+                Err(Error::from(serde_json::Error::custom(format!(
                     "Received `{unknown_type}` content type response that cannot be converted to `models::Queue`"
-                ))));
+                ))))
             }
         }
     } else {

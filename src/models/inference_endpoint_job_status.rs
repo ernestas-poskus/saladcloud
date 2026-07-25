@@ -13,9 +13,11 @@ use serde::{Deserialize, Serialize};
 /// InferenceEndpointJobStatus : The current status.
 /// The current status.
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+#[derive(Default)]
 pub enum InferenceEndpointJobStatus {
     #[serde(rename = "pending")]
     /// Variant.
+    #[default]
     Pending,
     #[serde(rename = "running")]
     /// Variant.
@@ -43,8 +45,3 @@ impl std::fmt::Display for InferenceEndpointJobStatus {
     }
 }
 
-impl Default for InferenceEndpointJobStatus {
-    fn default() -> InferenceEndpointJobStatus {
-        Self::Pending
-    }
-}

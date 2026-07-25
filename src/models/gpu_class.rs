@@ -73,17 +73,14 @@ impl GpuClass {
 }
 /// The type of GPU class
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+#[derive(Default)]
 pub enum GpuClassType {
     #[serde(rename = "community")]
     /// Variant.
+    #[default]
     Community,
     #[serde(rename = "secure")]
     /// Variant.
     Secure,
 }
 
-impl Default for GpuClassType {
-    fn default() -> GpuClassType {
-        Self::Community
-    }
-}

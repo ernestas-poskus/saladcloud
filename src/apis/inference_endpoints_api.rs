@@ -180,14 +180,14 @@ pub async fn create_inference_endpoint_job(
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => {
-                return Err(Error::from(serde_json::Error::custom(
+                Err(Error::from(serde_json::Error::custom(
                     "Received `text/plain` content type response that cannot be converted to `models::InferenceEndpointJob`",
-                )));
+                )))
             }
             ContentType::Unsupported(unknown_type) => {
-                return Err(Error::from(serde_json::Error::custom(format!(
+                Err(Error::from(serde_json::Error::custom(format!(
                     "Received `{unknown_type}` content type response that cannot be converted to `models::InferenceEndpointJob`"
-                ))));
+                ))))
             }
         }
     } else {
@@ -300,14 +300,14 @@ pub async fn get_inference_endpoint(
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => {
-                return Err(Error::from(serde_json::Error::custom(
+                Err(Error::from(serde_json::Error::custom(
                     "Received `text/plain` content type response that cannot be converted to `models::InferenceEndpoint`",
-                )));
+                )))
             }
             ContentType::Unsupported(unknown_type) => {
-                return Err(Error::from(serde_json::Error::custom(format!(
+                Err(Error::from(serde_json::Error::custom(format!(
                     "Received `{unknown_type}` content type response that cannot be converted to `models::InferenceEndpoint`"
-                ))));
+                ))))
             }
         }
     } else {
@@ -370,14 +370,14 @@ pub async fn get_inference_endpoint_job(
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => {
-                return Err(Error::from(serde_json::Error::custom(
+                Err(Error::from(serde_json::Error::custom(
                     "Received `text/plain` content type response that cannot be converted to `models::InferenceEndpointJob`",
-                )));
+                )))
             }
             ContentType::Unsupported(unknown_type) => {
-                return Err(Error::from(serde_json::Error::custom(format!(
+                Err(Error::from(serde_json::Error::custom(format!(
                     "Received `{unknown_type}` content type response that cannot be converted to `models::InferenceEndpointJob`"
-                ))));
+                ))))
             }
         }
     } else {
@@ -447,14 +447,14 @@ pub async fn list_inference_endpoint_jobs(
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => {
-                return Err(Error::from(serde_json::Error::custom(
+                Err(Error::from(serde_json::Error::custom(
                     "Received `text/plain` content type response that cannot be converted to `models::InferenceEndpointJobCollection`",
-                )));
+                )))
             }
             ContentType::Unsupported(unknown_type) => {
-                return Err(Error::from(serde_json::Error::custom(format!(
+                Err(Error::from(serde_json::Error::custom(format!(
                     "Received `{unknown_type}` content type response that cannot be converted to `models::InferenceEndpointJobCollection`"
-                ))));
+                ))))
             }
         }
     } else {
@@ -521,14 +521,14 @@ pub async fn list_inference_endpoints(
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
             ContentType::Text => {
-                return Err(Error::from(serde_json::Error::custom(
+                Err(Error::from(serde_json::Error::custom(
                     "Received `text/plain` content type response that cannot be converted to `models::InferenceEndpointCollection`",
-                )));
+                )))
             }
             ContentType::Unsupported(unknown_type) => {
-                return Err(Error::from(serde_json::Error::custom(format!(
+                Err(Error::from(serde_json::Error::custom(format!(
                     "Received `{unknown_type}` content type response that cannot be converted to `models::InferenceEndpointCollection`"
-                ))));
+                ))))
             }
         }
     } else {

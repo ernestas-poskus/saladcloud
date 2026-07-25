@@ -13,9 +13,11 @@ use serde::{Deserialize, Serialize};
 /// ContainerGroupInstanceState : The state of the container group instance
 /// The state of the container group instance
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+#[derive(Default)]
 pub enum ContainerGroupInstanceState {
     #[serde(rename = "allocating")]
     /// Variant.
+    #[default]
     Allocating,
     #[serde(rename = "downloading")]
     /// Variant.
@@ -43,8 +45,3 @@ impl std::fmt::Display for ContainerGroupInstanceState {
     }
 }
 
-impl Default for ContainerGroupInstanceState {
-    fn default() -> ContainerGroupInstanceState {
-        Self::Allocating
-    }
-}

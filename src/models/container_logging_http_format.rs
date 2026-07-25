@@ -13,9 +13,11 @@ use serde::{Deserialize, Serialize};
 /// ContainerLoggingHttpFormat : The format in which logs will be delivered
 /// The format in which logs will be delivered
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+#[derive(Default)]
 pub enum ContainerLoggingHttpFormat {
     #[serde(rename = "json")]
     /// Variant.
+    #[default]
     Json,
     #[serde(rename = "json_lines")]
     /// Variant.
@@ -31,8 +33,3 @@ impl std::fmt::Display for ContainerLoggingHttpFormat {
     }
 }
 
-impl Default for ContainerLoggingHttpFormat {
-    fn default() -> ContainerLoggingHttpFormat {
-        Self::Json
-    }
-}

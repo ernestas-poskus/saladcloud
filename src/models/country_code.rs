@@ -13,9 +13,11 @@ use serde::{Deserialize, Serialize};
 /// CountryCode : ISO 3166-1 alpha-2 country code
 /// ISO 3166-1 alpha-2 country code
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+#[derive(Default)]
 pub enum CountryCode {
     #[serde(rename = "af")]
     /// Variant.
+    #[default]
     Af,
     #[serde(rename = "al")]
     /// Variant.
@@ -1019,8 +1021,3 @@ impl std::fmt::Display for CountryCode {
     }
 }
 
-impl Default for CountryCode {
-    fn default() -> CountryCode {
-        Self::Af
-    }
-}
