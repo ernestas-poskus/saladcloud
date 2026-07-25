@@ -32,11 +32,18 @@ time = { version = "0.3", default-features = true, features = [
   "serde",
   "macros",
 ] }
+prost = "0.14"
+prost-types = "0.14"
+tonic = { version = "0.14", default-features = false, features = [
+  "transport",
+  "codegen",
+] }
+tonic-prost = "0.14"
 
 [features]
 default = ["rustls"]
-native-tls = ["reqwest/native-tls"]
-rustls = ["reqwest/rustls"]
+native-tls = ["reqwest/native-tls", "tonic/tls-native-roots"]
+rustls = ["reqwest/rustls", "tonic/tls-ring", "tonic/tls-webpki-roots"]
 
 [dev-dependencies]
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }

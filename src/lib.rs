@@ -35,3 +35,5 @@
 pub mod apis;
 /// Module.
 pub mod models;
+/// SaladCloud Job Queue worker support.
+pub mod worker;
