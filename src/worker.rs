@@ -100,6 +100,42 @@ pub struct WorkerConfig {
     pub service_endpoint: String,
     /// Whether to use TLS for the gRPC connection.
     pub use_tls: bool,
+    /// Request timeout for individual gRPC requests.
+    pub request_timeout: Option<Duration>,
+    /// Connection establishment timeout.
+    pub connect_timeout: Option<Duration>,
+    /// Duration of inactivity before sending TCP keepalive probes.
+    pub tcp_keepalive: Option<Duration>,
+    /// Duration between successive TCP keepalive retransmissions.
+    pub tcp_keepalive_interval: Option<Duration>,
+    /// Number of TCP keepalive retransmissions before considering connection dead.
+    pub tcp_keepalive_retries: Option<u32>,
+    /// Whether `TCP_NODELAY` is enabled.
+    pub tcp_nodelay: bool,
+    /// Interval between HTTP/2 PING frames to keep connection alive.
+    pub http2_keep_alive_interval: Option<Duration>,
+    /// Timeout for HTTP/2 PING response before considering connection dead.
+    pub keep_alive_timeout: Option<Duration>,
+    /// Whether HTTP/2 PING frames are sent even when there are no active streams.
+    pub keep_alive_while_idle: Option<bool>,
+    /// Maximum number of concurrent requests permitted on the channel.
+    pub concurrency_limit: Option<usize>,
+    /// Rate limit tuple `(max_requests, duration)` for client-side rate limiting.
+    pub rate_limit: Option<(u64, Duration)>,
+    /// Initial HTTP/2 stream-level flow control window size in bytes.
+    pub initial_stream_window_size: Option<u32>,
+    /// Initial HTTP/2 connection-level flow control window size in bytes.
+    pub initial_connection_window_size: Option<u32>,
+    /// Maximum HTTP/2 frame size in bytes.
+    pub max_frame_size: Option<u32>,
+    /// Maximum size of HTTP/2 header table.
+    pub http2_header_table_size: Option<u32>,
+    /// Maximum size of received HTTP/2 header frames.
+    pub http2_max_header_list_size: Option<u32>,
+    /// Whether to enable HTTP/2 adaptive flow control window.
+    pub http2_adaptive_window: Option<bool>,
+    /// Buffer size for internal Tower service channel.
+    pub buffer_size: Option<usize>,
 }
 
 impl Default for WorkerConfig {
@@ -108,6 +144,24 @@ impl Default for WorkerConfig {
             metadata_uri: "http://169.254.169.254:80".to_string(),
             service_endpoint: "job-queue-worker-api.salad.com:443".to_string(),
             use_tls: true,
+            request_timeout: Some(Duration::from_secs(30)),
+            connect_timeout: Some(Duration::from_secs(10)),
+            tcp_keepalive: Some(Duration::from_secs(30)),
+            tcp_keepalive_interval: Some(Duration::from_secs(10)),
+            tcp_keepalive_retries: Some(3),
+            tcp_nodelay: true,
+            http2_keep_alive_interval: Some(Duration::from_secs(30)),
+            keep_alive_timeout: Some(Duration::from_secs(10)),
+            keep_alive_while_idle: Some(true),
+            concurrency_limit: None,
+            rate_limit: None,
+            initial_stream_window_size: None,
+            initial_connection_window_size: None,
+            max_frame_size: None,
+            http2_header_table_size: None,
+            http2_max_header_list_size: None,
+            http2_adaptive_window: None,
+            buffer_size: None,
         }
     }
 }
@@ -172,9 +226,56 @@ pub struct QueueWorker {
 impl QueueWorker {
     /// Connects to the SaladCloud Job Queue worker service.
     pub async fn connect(config: WorkerConfig) -> Result<Self> {
-        let endpoint = Endpoint::from_shared(config.service_endpoint_uri())?
+        let mut endpoint = Endpoint::from_shared(config.service_endpoint_uri())?
             .user_agent("saladcloud-rust-worker/0.1 tonic")?
-            .timeout(Duration::from_secs(30));
+            .tcp_nodelay(config.tcp_nodelay)
+            .tcp_keepalive(config.tcp_keepalive)
+            .tcp_keepalive_interval(config.tcp_keepalive_interval)
+            .tcp_keepalive_retries(config.tcp_keepalive_retries);
+
+        if let Some(timeout) = config.request_timeout {
+            endpoint = endpoint.timeout(timeout);
+        }
+        if let Some(connect_timeout) = config.connect_timeout {
+            endpoint = endpoint.connect_timeout(connect_timeout);
+        }
+        if let Some(interval) = config.http2_keep_alive_interval {
+            endpoint = endpoint.http2_keep_alive_interval(interval);
+        }
+        if let Some(timeout) = config.keep_alive_timeout {
+            endpoint = endpoint.keep_alive_timeout(timeout);
+        }
+        if let Some(while_idle) = config.keep_alive_while_idle {
+            endpoint = endpoint.keep_alive_while_idle(while_idle);
+        }
+        if let Some(limit) = config.concurrency_limit {
+            endpoint = endpoint.concurrency_limit(limit);
+        }
+        if let Some((limit, duration)) = config.rate_limit {
+            endpoint = endpoint.rate_limit(limit, duration);
+        }
+        if let Some(sz) = config.initial_stream_window_size {
+            endpoint = endpoint.initial_stream_window_size(sz);
+        }
+        if let Some(sz) = config.initial_connection_window_size {
+            endpoint = endpoint.initial_connection_window_size(sz);
+        }
+        if let Some(sz) = config.max_frame_size {
+            endpoint = endpoint.max_frame_size(sz);
+        }
+        if let Some(size) = config.http2_header_table_size {
+            endpoint = endpoint.http2_header_table_size(size);
+        }
+        if let Some(size) = config.http2_max_header_list_size {
+            endpoint = endpoint.http2_max_header_list_size(size);
+        }
+        if let Some(adaptive) = config.http2_adaptive_window {
+            endpoint = endpoint.http2_adaptive_window(adaptive);
+        }
+        if let Some(sz) = config.buffer_size {
+            endpoint = endpoint.buffer_size(sz);
+        }
+
         let grpc = proto::JobQueueWorkerServiceClient::connect(endpoint).await?;
         Ok(Self {
             config,
