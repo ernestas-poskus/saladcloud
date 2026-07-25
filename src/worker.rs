@@ -1,7 +1,5 @@
 //! SaladCloud Job Queue worker support.
 
-use std::error::Error as StdError;
-use std::fmt;
 use std::future::Future;
 use std::time::Duration;
 
@@ -10,85 +8,36 @@ use tonic::metadata::MetadataValue;
 use tonic::transport::{Channel, Endpoint};
 use tonic::{Request, Status};
 
+use thiserror::Error;
+use tracing::error;
+
 /// Result type used by the SaladCloud worker client.
 pub type Result<T> = std::result::Result<T, Error>;
 
 /// Errors returned by the SaladCloud worker client.
-#[derive(Debug)]
+#[derive(Debug, Error)]
 pub enum Error {
     /// The SaladCloud metadata service returned an invalid or empty token response.
+    #[error("missing SaladCloud workload token")]
     MissingToken,
     /// The SaladCloud metadata service returned a non-success HTTP response.
+    #[error("failed to fetch SaladCloud workload token: {0}")]
     TokenStatus(reqwest::StatusCode),
     /// HTTP client error while talking to IMDS.
-    Reqwest(reqwest::Error),
+    #[error("SaladCloud metadata request failed: {0}")]
+    Reqwest(#[from] reqwest::Error),
     /// JSON decode error.
-    Json(serde_json::Error),
+    #[error("JSON error: {0}")]
+    Json(#[from] serde_json::Error),
     /// gRPC transport setup error.
-    Transport(tonic::transport::Error),
+    #[error("SaladCloud worker transport failed: {0}")]
+    Transport(#[from] tonic::transport::Error),
     /// gRPC status returned by the queue worker service.
-    Status(Status),
+    #[error("SaladCloud worker gRPC failed: {0}")]
+    Status(#[from] Status),
     /// Invalid gRPC authorization metadata.
-    Metadata(tonic::metadata::errors::InvalidMetadataValue),
-}
-
-impl fmt::Display for Error {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        match self {
-            Self::MissingToken => write!(f, "missing SaladCloud workload token"),
-            Self::TokenStatus(status) => {
-                write!(f, "failed to fetch SaladCloud workload token: {status}")
-            }
-            Self::Reqwest(error) => write!(f, "SaladCloud metadata request failed: {error}"),
-            Self::Json(error) => write!(f, "JSON error: {error}"),
-            Self::Transport(error) => write!(f, "SaladCloud worker transport failed: {error}"),
-            Self::Status(status) => write!(f, "SaladCloud worker gRPC failed: {status}"),
-            Self::Metadata(error) => write!(f, "invalid SaladCloud worker metadata: {error}"),
-        }
-    }
-}
-
-impl StdError for Error {
-    fn source(&self) -> Option<&(dyn StdError + 'static)> {
-        match self {
-            Self::Reqwest(error) => Some(error),
-            Self::Json(error) => Some(error),
-            Self::Transport(error) => Some(error),
-            Self::Status(error) => Some(error),
-            Self::Metadata(error) => Some(error),
-            Self::MissingToken | Self::TokenStatus(_) => None,
-        }
-    }
-}
-
-impl From<reqwest::Error> for Error {
-    fn from(error: reqwest::Error) -> Self {
-        Self::Reqwest(error)
-    }
-}
-
-impl From<serde_json::Error> for Error {
-    fn from(error: serde_json::Error) -> Self {
-        Self::Json(error)
-    }
-}
-
-impl From<tonic::transport::Error> for Error {
-    fn from(error: tonic::transport::Error) -> Self {
-        Self::Transport(error)
-    }
-}
-
-impl From<Status> for Error {
-    fn from(error: Status) -> Self {
-        Self::Status(error)
-    }
-}
-
-impl From<tonic::metadata::errors::InvalidMetadataValue> for Error {
-    fn from(error: tonic::metadata::errors::InvalidMetadataValue) -> Self {
-        Self::Metadata(error)
-    }
+    #[error("invalid SaladCloud worker metadata: {0}")]
+    Metadata(#[from] tonic::metadata::errors::InvalidMetadataValue),
 }
 
 /// Configuration for the SaladCloud Job Queue worker service.
@@ -311,7 +260,10 @@ impl QueueWorker {
             let job_id = job.id.clone();
             match handler(job).await {
                 Ok(output) => self.complete_job(&token, job_id, output).await?,
-                Err(_) => self.reject_job(&token, job_id).await?,
+                Err(e) => {
+                    error!("Job {job_id} failed: {e}");
+                    self.reject_job(&token, job_id).await?
+                }
             }
         }
 
