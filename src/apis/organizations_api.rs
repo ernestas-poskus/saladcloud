@@ -112,11 +112,11 @@ pub async fn get_cpu_availability(
     } else {
         let content = resp.text().await?;
         let entity: Option<GetCpuAvailabilityError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent {
+        Err(Error::ResponseError(Box::new(ResponseContent {
             status,
             content,
             entity,
-        }))
+        })))
     }
 }
 
@@ -179,10 +179,10 @@ pub async fn get_gpu_availability(
     } else {
         let content = resp.text().await?;
         let entity: Option<GetGpuAvailabilityError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent {
+        Err(Error::ResponseError(Box::new(ResponseContent {
             status,
             content,
             entity,
-        }))
+        })))
     }
 }

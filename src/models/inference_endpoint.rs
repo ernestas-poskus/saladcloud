@@ -47,6 +47,7 @@ pub struct InferenceEndpoint {
 
 impl InferenceEndpoint {
     /// Represents an inference endpoint
+    #[allow(clippy::too_many_arguments)]
     pub fn new(
         description: String,
         display_name: String,

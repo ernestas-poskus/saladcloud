@@ -271,11 +271,11 @@ pub async fn create_container_group(
     } else {
         let content = resp.text().await?;
         let entity: Option<CreateContainerGroupError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent {
+        Err(Error::ResponseError(Box::new(ResponseContent {
             status,
             content,
             entity,
-        }))
+        })))
     }
 }
 
@@ -324,11 +324,11 @@ pub async fn delete_container_group(
     } else {
         let content = resp.text().await?;
         let entity: Option<DeleteContainerGroupError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent {
+        Err(Error::ResponseError(Box::new(ResponseContent {
             status,
             content,
             entity,
-        }))
+        })))
     }
 }
 
@@ -392,11 +392,11 @@ pub async fn get_container_group(
     } else {
         let content = resp.text().await?;
         let entity: Option<GetContainerGroupError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent {
+        Err(Error::ResponseError(Box::new(ResponseContent {
             status,
             content,
             entity,
-        }))
+        })))
     }
 }
 
@@ -463,11 +463,11 @@ pub async fn get_container_group_instance(
     } else {
         let content = resp.text().await?;
         let entity: Option<GetContainerGroupInstanceError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent {
+        Err(Error::ResponseError(Box::new(ResponseContent {
             status,
             content,
             entity,
-        }))
+        })))
     }
 }
 
@@ -531,11 +531,11 @@ pub async fn list_container_group_instances(
     } else {
         let content = resp.text().await?;
         let entity: Option<ListContainerGroupInstancesError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent {
+        Err(Error::ResponseError(Box::new(ResponseContent {
             status,
             content,
             entity,
-        }))
+        })))
     }
 }
 
@@ -596,11 +596,11 @@ pub async fn list_container_groups(
     } else {
         let content = resp.text().await?;
         let entity: Option<ListContainerGroupsError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent {
+        Err(Error::ResponseError(Box::new(ResponseContent {
             status,
             content,
             entity,
-        }))
+        })))
     }
 }
 
@@ -653,11 +653,11 @@ pub async fn reallocate_container_group_instance(
         let content = resp.text().await?;
         let entity: Option<ReallocateContainerGroupInstanceError> =
             serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent {
+        Err(Error::ResponseError(Box::new(ResponseContent {
             status,
             content,
             entity,
-        }))
+        })))
     }
 }
 
@@ -710,11 +710,11 @@ pub async fn recreate_container_group_instance(
         let content = resp.text().await?;
         let entity: Option<RecreateContainerGroupInstanceError> =
             serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent {
+        Err(Error::ResponseError(Box::new(ResponseContent {
             status,
             content,
             entity,
-        }))
+        })))
     }
 }
 
@@ -767,11 +767,11 @@ pub async fn restart_container_group_instance(
         let content = resp.text().await?;
         let entity: Option<RestartContainerGroupInstanceError> =
             serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent {
+        Err(Error::ResponseError(Box::new(ResponseContent {
             status,
             content,
             entity,
-        }))
+        })))
     }
 }
 
@@ -820,11 +820,11 @@ pub async fn start_container_group(
     } else {
         let content = resp.text().await?;
         let entity: Option<StartContainerGroupError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent {
+        Err(Error::ResponseError(Box::new(ResponseContent {
             status,
             content,
             entity,
-        }))
+        })))
     }
 }
 
@@ -873,11 +873,11 @@ pub async fn stop_container_group(
     } else {
         let content = resp.text().await?;
         let entity: Option<StopContainerGroupError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent {
+        Err(Error::ResponseError(Box::new(ResponseContent {
             status,
             content,
             entity,
-        }))
+        })))
     }
 }
 
@@ -946,11 +946,11 @@ pub async fn update_container_group(
     } else {
         let content = resp.text().await?;
         let entity: Option<UpdateContainerGroupError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent {
+        Err(Error::ResponseError(Box::new(ResponseContent {
             status,
             content,
             entity,
-        }))
+        })))
     }
 }
 
@@ -1022,10 +1022,10 @@ pub async fn update_container_group_instance(
     } else {
         let content = resp.text().await?;
         let entity: Option<UpdateContainerGroupInstanceError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent {
+        Err(Error::ResponseError(Box::new(ResponseContent {
             status,
             content,
             entity,
-        }))
+        })))
     }
 }

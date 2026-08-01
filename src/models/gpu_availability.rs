@@ -48,3 +48,9 @@ impl GpuAvailability {
         }
     }
 }
+
+impl Default for GpuAvailability {
+    fn default() -> Self {
+        Self::new()
+    }
+}

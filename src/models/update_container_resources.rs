@@ -67,3 +67,9 @@ impl UpdateContainerResources {
         }
     }
 }
+
+impl Default for UpdateContainerResources {
+    fn default() -> Self {
+        Self::new()
+    }
+}

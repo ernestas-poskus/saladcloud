@@ -40,3 +40,9 @@ impl QueuePatch {
         }
     }
 }
+
+impl Default for QueuePatch {
+    fn default() -> Self {
+        Self::new()
+    }
+}

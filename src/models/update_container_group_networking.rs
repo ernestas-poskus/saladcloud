@@ -29,3 +29,9 @@ impl UpdateContainerGroupNetworking {
         UpdateContainerGroupNetworking { port: None }
     }
 }
+
+impl Default for UpdateContainerGroupNetworking {
+    fn default() -> Self {
+        Self::new()
+    }
+}

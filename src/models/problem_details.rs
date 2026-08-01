@@ -42,3 +42,9 @@ impl ProblemDetails {
         }
     }
 }
+
+impl Default for ProblemDetails {
+    fn default() -> Self {
+        Self::new()
+    }
+}

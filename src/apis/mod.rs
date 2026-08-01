@@ -27,7 +27,7 @@ pub enum Error<T> {
     Io(#[from] std::io::Error),
     /// Variant.
     #[error("error in response: status code {0}")]
-    ResponseError(ResponseContent<T>),
+    ResponseError(Box<ResponseContent<T>>),
 }
 
 impl<T> fmt::Display for ResponseContent<T> {

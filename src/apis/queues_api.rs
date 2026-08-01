@@ -207,11 +207,11 @@ pub async fn create_queue(
     } else {
         let content = resp.text().await?;
         let entity: Option<CreateQueueError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent {
+        Err(Error::ResponseError(Box::new(ResponseContent {
             status,
             content,
             entity,
-        }))
+        })))
     }
 }
 
@@ -280,11 +280,11 @@ pub async fn create_queue_job(
     } else {
         let content = resp.text().await?;
         let entity: Option<CreateQueueJobError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent {
+        Err(Error::ResponseError(Box::new(ResponseContent {
             status,
             content,
             entity,
-        }))
+        })))
     }
 }
 
@@ -333,11 +333,11 @@ pub async fn delete_queue(
     } else {
         let content = resp.text().await?;
         let entity: Option<DeleteQueueError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent {
+        Err(Error::ResponseError(Box::new(ResponseContent {
             status,
             content,
             entity,
-        }))
+        })))
     }
 }
 
@@ -389,11 +389,11 @@ pub async fn delete_queue_job(
     } else {
         let content = resp.text().await?;
         let entity: Option<DeleteQueueJobError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent {
+        Err(Error::ResponseError(Box::new(ResponseContent {
             status,
             content,
             entity,
-        }))
+        })))
     }
 }
 
@@ -457,11 +457,11 @@ pub async fn get_queue(
     } else {
         let content = resp.text().await?;
         let entity: Option<GetQueueError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent {
+        Err(Error::ResponseError(Box::new(ResponseContent {
             status,
             content,
             entity,
-        }))
+        })))
     }
 }
 
@@ -528,11 +528,11 @@ pub async fn get_queue_job(
     } else {
         let content = resp.text().await?;
         let entity: Option<GetQueueJobError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent {
+        Err(Error::ResponseError(Box::new(ResponseContent {
             status,
             content,
             entity,
-        }))
+        })))
     }
 }
 
@@ -606,11 +606,11 @@ pub async fn list_queue_jobs(
     } else {
         let content = resp.text().await?;
         let entity: Option<ListQueueJobsError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent {
+        Err(Error::ResponseError(Box::new(ResponseContent {
             status,
             content,
             entity,
-        }))
+        })))
     }
 }
 
@@ -671,11 +671,11 @@ pub async fn list_queues(
     } else {
         let content = resp.text().await?;
         let entity: Option<ListQueuesError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent {
+        Err(Error::ResponseError(Box::new(ResponseContent {
             status,
             content,
             entity,
-        }))
+        })))
     }
 }
 
@@ -744,10 +744,10 @@ pub async fn update_queue(
     } else {
         let content = resp.text().await?;
         let entity: Option<UpdateQueueError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent {
+        Err(Error::ResponseError(Box::new(ResponseContent {
             status,
             content,
             entity,
-        }))
+        })))
     }
 }

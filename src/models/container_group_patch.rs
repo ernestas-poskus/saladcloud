@@ -105,3 +105,9 @@ impl ContainerGroupPatch {
         }
     }
 }
+
+impl Default for ContainerGroupPatch {
+    fn default() -> Self {
+        Self::new()
+    }
+}

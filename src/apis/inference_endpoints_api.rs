@@ -191,11 +191,11 @@ pub async fn create_inference_endpoint_job(
     } else {
         let content = resp.text().await?;
         let entity: Option<CreateInferenceEndpointJobError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent {
+        Err(Error::ResponseError(Box::new(ResponseContent {
             status,
             content,
             entity,
-        }))
+        })))
     }
 }
 
@@ -244,11 +244,11 @@ pub async fn delete_inference_endpoint_job(
     } else {
         let content = resp.text().await?;
         let entity: Option<DeleteInferenceEndpointJobError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent {
+        Err(Error::ResponseError(Box::new(ResponseContent {
             status,
             content,
             entity,
-        }))
+        })))
     }
 }
 
@@ -309,11 +309,11 @@ pub async fn get_inference_endpoint(
     } else {
         let content = resp.text().await?;
         let entity: Option<GetInferenceEndpointError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent {
+        Err(Error::ResponseError(Box::new(ResponseContent {
             status,
             content,
             entity,
-        }))
+        })))
     }
 }
 
@@ -377,11 +377,11 @@ pub async fn get_inference_endpoint_job(
     } else {
         let content = resp.text().await?;
         let entity: Option<GetInferenceEndpointJobError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent {
+        Err(Error::ResponseError(Box::new(ResponseContent {
             status,
             content,
             entity,
-        }))
+        })))
     }
 }
 
@@ -452,11 +452,11 @@ pub async fn list_inference_endpoint_jobs(
     } else {
         let content = resp.text().await?;
         let entity: Option<ListInferenceEndpointJobsError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent {
+        Err(Error::ResponseError(Box::new(ResponseContent {
             status,
             content,
             entity,
-        }))
+        })))
     }
 }
 
@@ -524,10 +524,10 @@ pub async fn list_inference_endpoints(
     } else {
         let content = resp.text().await?;
         let entity: Option<ListInferenceEndpointsError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent {
+        Err(Error::ResponseError(Box::new(ResponseContent {
             status,
             content,
             entity,
-        }))
+        })))
     }
 }

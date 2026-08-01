@@ -39,3 +39,9 @@ impl CpuAvailabilityPrototype {
         }
     }
 }
+
+impl Default for CpuAvailabilityPrototype {
+    fn default() -> Self {
+        Self::new()
+    }
+}

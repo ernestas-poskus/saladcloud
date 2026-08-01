@@ -86,3 +86,9 @@ impl UpdateContainer {
         }
     }
 }
+
+impl Default for UpdateContainer {
+    fn default() -> Self {
+        Self::new()
+    }
+}

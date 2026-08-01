@@ -59,6 +59,7 @@ pub struct InferenceEndpointJob {
 
 impl InferenceEndpointJob {
     /// Represents a inference endpoint job
+    #[allow(clippy::too_many_arguments)]
     pub fn new(
         create_time: time::OffsetDateTime,
         events: Vec<models::InferenceEndpointJobEvent>,

@@ -95,11 +95,11 @@ pub async fn get_webhook_secret_key(
     } else {
         let content = resp.text().await?;
         let entity: Option<GetWebhookSecretKeyError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent {
+        Err(Error::ResponseError(Box::new(ResponseContent {
             status,
             content,
             entity,
-        }))
+        })))
     }
 }
 
@@ -159,10 +159,10 @@ pub async fn update_webhook_secret_key(
     } else {
         let content = resp.text().await?;
         let entity: Option<UpdateWebhookSecretKeyError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent {
+        Err(Error::ResponseError(Box::new(ResponseContent {
             status,
             content,
             entity,
-        }))
+        })))
     }
 }

@@ -47,3 +47,9 @@ impl UpdateContainerLogging {
         }
     }
 }
+
+impl Default for UpdateContainerLogging {
+    fn default() -> Self {
+        Self::new()
+    }
+}

@@ -31,3 +31,9 @@ impl ContainerGroupInstancePatch {
         }
     }
 }
+
+impl Default for ContainerGroupInstancePatch {
+    fn default() -> Self {
+        Self::new()
+    }
+}

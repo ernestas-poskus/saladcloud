@@ -47,3 +47,9 @@ impl CreateContainerLogging {
         }
     }
 }
+
+impl Default for CreateContainerLogging {
+    fn default() -> Self {
+        Self::new()
+    }
+}

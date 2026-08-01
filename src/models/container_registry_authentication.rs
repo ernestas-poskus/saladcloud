@@ -48,3 +48,9 @@ impl ContainerRegistryAuthentication {
         }
     }
 }
+
+impl Default for ContainerRegistryAuthentication {
+    fn default() -> Self {
+        Self::new()
+    }
+}

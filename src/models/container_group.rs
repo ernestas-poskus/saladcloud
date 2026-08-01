@@ -108,6 +108,7 @@ pub struct ContainerGroup {
 
 impl ContainerGroup {
     /// A container group definition that represents a scalable set of identical containers running as a distributed service
+    #[allow(clippy::too_many_arguments)]
     pub fn new(
         autostart_policy: bool,
         container: models::Container,
