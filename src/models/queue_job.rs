@@ -72,8 +72,9 @@ impl QueueJob {
     }
 }
 /// The job status
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-#[derive(Default)]
+#[derive(
+    Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize, Default,
+)]
 pub enum Status {
     #[serde(rename = "pending")]
     /// Variant.
@@ -92,4 +93,3 @@ pub enum Status {
     /// Variant.
     Failed,
 }
-

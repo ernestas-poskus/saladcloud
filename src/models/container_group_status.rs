@@ -12,8 +12,9 @@ use serde::{Deserialize, Serialize};
 
 /// ContainerGroupStatus : Represents the current operational state of a container group within the Salad platform.
 /// Represents the current operational state of a container group within the Salad platform.
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-#[derive(Default)]
+#[derive(
+    Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize, Default,
+)]
 pub enum ContainerGroupStatus {
     #[serde(rename = "pending")]
     /// Variant.
@@ -48,4 +49,3 @@ impl std::fmt::Display for ContainerGroupStatus {
         }
     }
 }
-

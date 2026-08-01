@@ -12,8 +12,9 @@ use serde::{Deserialize, Serialize};
 
 /// ContainerNetworkingProtocol : Defines the communication protocol used for network traffic between containers or external systems. Currently supports HTTP protocol for web-based communication.
 /// Defines the communication protocol used for network traffic between containers or external systems. Currently supports HTTP protocol for web-based communication.
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-#[derive(Default)]
+#[derive(
+    Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize, Default,
+)]
 pub enum ContainerNetworkingProtocol {
     #[serde(rename = "http")]
     /// Variant.
@@ -28,4 +29,3 @@ impl std::fmt::Display for ContainerNetworkingProtocol {
         }
     }
 }
-

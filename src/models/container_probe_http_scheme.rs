@@ -12,8 +12,9 @@ use serde::{Deserialize, Serialize};
 
 /// ContainerProbeHttpScheme : The protocol scheme used for HTTP probe requests in container health checks.
 /// The protocol scheme used for HTTP probe requests in container health checks.
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-#[derive(Default)]
+#[derive(
+    Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize, Default,
+)]
 pub enum ContainerProbeHttpScheme {
     #[serde(rename = "http")]
     /// Variant.
@@ -32,4 +33,3 @@ impl std::fmt::Display for ContainerProbeHttpScheme {
         }
     }
 }
-

@@ -72,8 +72,9 @@ impl GpuClass {
     }
 }
 /// The type of GPU class
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-#[derive(Default)]
+#[derive(
+    Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize, Default,
+)]
 pub enum GpuClassType {
     #[serde(rename = "community")]
     /// Variant.
@@ -83,4 +84,3 @@ pub enum GpuClassType {
     /// Variant.
     Secure,
 }
-

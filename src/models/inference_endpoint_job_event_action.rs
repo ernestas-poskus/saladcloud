@@ -12,8 +12,9 @@ use serde::{Deserialize, Serialize};
 
 /// InferenceEndpointJobEventAction : The action that was taken on the inference endpoint job.
 /// The action that was taken on the inference endpoint job.
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-#[derive(Default)]
+#[derive(
+    Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize, Default,
+)]
 pub enum InferenceEndpointJobEventAction {
     #[serde(rename = "created")]
     /// Variant.
@@ -44,4 +45,3 @@ impl std::fmt::Display for InferenceEndpointJobEventAction {
         }
     }
 }
-

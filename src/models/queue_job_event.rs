@@ -28,8 +28,9 @@ impl QueueJobEvent {
     }
 }
 /// The action that was taken on the queue job
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-#[derive(Default)]
+#[derive(
+    Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize, Default,
+)]
 pub enum Action {
     #[serde(rename = "created")]
     /// Variant.
@@ -48,4 +49,3 @@ pub enum Action {
     /// Variant.
     Failed,
 }
-

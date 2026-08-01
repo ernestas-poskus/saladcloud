@@ -12,8 +12,9 @@ use serde::{Deserialize, Serialize};
 
 /// ContainerLoggingHttpCompression : The compression algorithm to apply to logs before transmission
 /// The compression algorithm to apply to logs before transmission
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-#[derive(Default)]
+#[derive(
+    Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize, Default,
+)]
 pub enum ContainerLoggingHttpCompression {
     #[serde(rename = "none")]
     /// Variant.
@@ -32,4 +33,3 @@ impl std::fmt::Display for ContainerLoggingHttpCompression {
         }
     }
 }
-

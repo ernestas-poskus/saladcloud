@@ -12,8 +12,9 @@ use serde::{Deserialize, Serialize};
 
 /// ContainerRestartPolicy : Specifies the policy for restarting containers when they exit or fail.
 /// Specifies the policy for restarting containers when they exit or fail.
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-#[derive(Default)]
+#[derive(
+    Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize, Default,
+)]
 pub enum ContainerRestartPolicy {
     #[serde(rename = "always")]
     /// Variant.
@@ -36,4 +37,3 @@ impl std::fmt::Display for ContainerRestartPolicy {
         }
     }
 }
-

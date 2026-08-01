@@ -12,8 +12,9 @@ use serde::{Deserialize, Serialize};
 
 /// ContainerGroupNetworkingLoadBalancer : The container group networking load balancer.
 /// The container group networking load balancer.
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-#[derive(Default)]
+#[derive(
+    Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize, Default,
+)]
 pub enum ContainerGroupNetworkingLoadBalancer {
     #[serde(rename = "round_robin")]
     /// Variant.
@@ -32,4 +33,3 @@ impl std::fmt::Display for ContainerGroupNetworkingLoadBalancer {
         }
     }
 }
-

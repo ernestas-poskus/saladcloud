@@ -12,8 +12,9 @@ use serde::{Deserialize, Serialize};
 
 /// ContainerLoggingHttpFormat : The format in which logs will be delivered
 /// The format in which logs will be delivered
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-#[derive(Default)]
+#[derive(
+    Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize, Default,
+)]
 pub enum ContainerLoggingHttpFormat {
     #[serde(rename = "json")]
     /// Variant.
@@ -32,4 +33,3 @@ impl std::fmt::Display for ContainerLoggingHttpFormat {
         }
     }
 }
-

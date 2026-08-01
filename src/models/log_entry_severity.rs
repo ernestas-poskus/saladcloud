@@ -12,8 +12,9 @@ use serde::{Deserialize, Serialize};
 
 /// LogEntrySeverity : The severity level of the log entry
 /// The severity level of the log entry
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-#[derive(Default)]
+#[derive(
+    Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize, Default,
+)]
 pub enum LogEntrySeverity {
     #[serde(rename = "default")]
     /// Variant.
@@ -60,4 +61,3 @@ impl std::fmt::Display for LogEntrySeverity {
         }
     }
 }
-
